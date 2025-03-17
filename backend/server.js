@@ -1,4 +1,5 @@
 import path from "path";
+import axios from "axios";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -24,6 +25,20 @@ app.use(express.urlencoded({ extended: true }));
 
 //cookie parser middleware
 app.use(cookieParser());
+
+const url = `https://proshop-uwql.onrender.com`;
+const interval  = 30000;
+function reloadWebsite(){
+    axios.get(url).then((response)=>{
+        console.log("website reloaded");
+    })
+    .catch((error)=>{
+        console.log(`Error  : ${error.message}`);
+    })
+}
+
+setInterval(reloadWebsite, interval);
+
 
 
 
